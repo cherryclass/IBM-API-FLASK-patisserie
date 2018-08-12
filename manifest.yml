@@ -1,0 +1,7 @@
+applications:
+- name: patisserie-flask
+  memory: 256M
+  instances: 1
+  route: patisserie-flask-${random-word}
+  services:
+  - patisserie-mysql
