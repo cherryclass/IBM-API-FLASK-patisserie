@@ -1,8 +1,9 @@
+import os
+import json
 from flask import Flask
 from flask import request
 from flask import jsonify
 from flaskext.mysql import MySQL
-import json
 
 app = Flask(__name__)
 
