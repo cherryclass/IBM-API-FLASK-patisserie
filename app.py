@@ -13,9 +13,8 @@ app = Flask(__name__)
 
 vcap_services = json.loads(os.getenv('VCAP_SERVICES'))
 mysql_creds = vcap_services['compose-for-mysql'][0]['credentials']['uri']
-logging.warning(mysql_creds)
 res = re.compile("\@|:|\/").split(mysql_creds)
-logging.warning(res)
+#logging.warning(res)
 
 
 
