@@ -1,18 +1,34 @@
 import os
 import json
+import logging
+import re
 from flask import Flask
 from flask import request
 from flask import jsonify
 from flaskext.mysql import MySQL
 
+
 app = Flask(__name__)
 
+
+vcap_services = json.loads(os.getenv('VCAP_SERVICES'))
+mysql_creds = vcap_services['compose-for-mysql'][0]['credentials']['uri']
+logging.warning(mysql_creds)
+res = re.compile("\@|:|\/").split(mysql_creds)
+logging.warning(res)
+
+
+
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_USER'] = 'admin'
+app.config['MYSQL_DATABASE_PASSWORD'] = res[4]
 app.config['MYSQL_DATABASE_DB'] = 'patisserie'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_HOST'] = res[5]
+app.config['MYSQL_DATABASE_PORT'] = res[6]
 mysql.init_app(app)
+
+
+
 
 @app.route("/")
 def hello():
