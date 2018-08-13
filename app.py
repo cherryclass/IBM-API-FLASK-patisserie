@@ -23,7 +23,7 @@ app.config['MYSQL_DATABASE_USER'] = 'admin'
 app.config['MYSQL_DATABASE_PASSWORD'] = res[4]
 app.config['MYSQL_DATABASE_DB'] = 'patisserie'
 app.config['MYSQL_DATABASE_HOST'] = res[5]
-app.config['MYSQL_DATABASE_PORT'] = res[6]
+app.config['MYSQL_DATABASE_PORT'] = int(res[6])
 mysql.init_app(app)
 
 
