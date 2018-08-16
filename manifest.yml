@@ -2,6 +2,7 @@ applications:
 - name: patisserie-flask
   memory: 256M
   instances: 1
-  route: patisserie-flask-${random-word}
+  routes: 
+    - route: patisserie-flask-${random-word}.eu-de.mybluemix.net
   services:
   - patisserie-mysql
